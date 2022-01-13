@@ -13,10 +13,10 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class MethodDetails {
+public class RuntimeDetails {
 
     private String className;
     private String methodName;
     private Long runTime;
-    private List<MethodDetails> internalMethodCalls;
+    private List<RuntimeDetails> internalMethodCalls;
 }

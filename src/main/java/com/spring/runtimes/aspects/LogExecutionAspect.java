@@ -48,10 +48,12 @@ public class LogExecutionAspect {
                 .getRequestAttributes().getAttribute(AppConstants.LOG_EXECUTION_MODEL, RequestAttributes.SCOPE_REQUEST))){
             return;
         }
-        MethodDetails logModel = ((RequestLogQueue) RequestContextHolder.getRequestAttributes()
+        RuntimeDetails runtimeDetails = ((RequestLogQueue) RequestContextHolder.getRequestAttributes()
                 .getAttribute(AppConstants.LOG_EXECUTION_MODEL, RequestAttributes.SCOPE_REQUEST)).jsonify();
-        RecentExecutionLogs.addLog(logModel);
-        log.info("\n{}",RuntimeUtils.prettyPrintJson(RecentExecutionLogs.getLogModels()));
+        if(!runtimeDetails.getInternalMethodCalls().isEmpty()) {
+            RecentExecutionLogs.addLog(runtimeDetails);
+            log.info("\n{}", RuntimeUtils.prettyPrintJson(runtimeDetails));
+        }
     }
 
     private void addResponse(LogType logEnum, Object data, String className){

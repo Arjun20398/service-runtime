@@ -12,9 +12,9 @@ public class RequestLogQueue {
 
     public final Queue<LogResponse> logResponses = new LinkedList<>();
 
-    public MethodDetails jsonify(){
+    public RuntimeDetails jsonify(){
 
-        MethodDetails logModel = new MethodDetails();
+        RuntimeDetails logModel = new RuntimeDetails();
         logModel.setInternalMethodCalls(new ArrayList<>());
         while (logResponses.size()>0 && logResponses.peek().getLogEnum().equals(LogType.START)){
             logModel.getInternalMethodCalls().add(jsonifyHelperSingle(logResponses));
@@ -22,8 +22,8 @@ public class RequestLogQueue {
         return logModel;
     }
 
-    public MethodDetails jsonifyHelperSingle(Queue<LogResponse> logResponses){
-        MethodDetails logModel = new MethodDetails();
+    public RuntimeDetails jsonifyHelperSingle(Queue<LogResponse> logResponses){
+        RuntimeDetails logModel = new RuntimeDetails();
 
         LogResponse logResponse = logResponses.remove();
         logModel.setMethodName((String) logResponse.getData());

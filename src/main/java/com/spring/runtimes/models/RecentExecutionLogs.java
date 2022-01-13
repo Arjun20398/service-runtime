@@ -7,9 +7,9 @@ import java.util.*;
 
 public class RecentExecutionLogs {
 
-    public static Queue<MethodDetails> logModels = new LinkedList<>();
+    public static Queue<RuntimeDetails> logModels = new LinkedList<>();
 
-    public static void addLog(MethodDetails logModel){
+    public static void addLog(RuntimeDetails logModel){
         if(Objects.isNull(logModel) || logModel.getInternalMethodCalls().isEmpty()){
             return;
         }
@@ -20,7 +20,7 @@ public class RecentExecutionLogs {
     }
 
     @JsonRawValue
-    public static List<MethodDetails> getLogModels(){
+    public static List<RuntimeDetails> getLogModels(){
         return new ArrayList<>(logModels);
     }
 }
