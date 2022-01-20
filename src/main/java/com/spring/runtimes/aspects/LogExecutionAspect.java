@@ -7,6 +7,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.aspectj.lang.reflect.MethodSignature;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -16,6 +18,7 @@ import java.util.Objects;
 @Aspect
 @Slf4j
 @Component
+@ConditionalOnProperty(name = "service.method.runtimes.log",havingValue = "true")
 public class LogExecutionAspect {
 
     @Around("@within(org.springframework.stereotype.Service)")
